@@ -4,40 +4,22 @@ document.body.appendChild(getSumBtn);
 
 const getSum = () => {
 //Add your code here
-	const priceCells = document.querySelectorAll('.price');
-
-  // Calculate total
+	const priceCells = document.querySelectorAll(".price");
   let total = 0;
   priceCells.forEach(cell => {
     total += parseFloat(cell.textContent);
   });
 
-  // Check if total row already exists and remove it
-  const existingTotalRow = document.querySelector('.total-row');
-  if (existingTotalRow) {
-    existingTotalRow.remove();
-  }
+  // Remove existing total row if any
+  const existingTotal = document.getElementById("ans");
+  if (existingTotal) existingTotal.remove();
 
-  // Select the table
-  const table = document.querySelector('table');
-
-  // Create a new row for the total
-  const totalRow = document.createElement('tr');
-  totalRow.classList.add('total-row'); // optional for styling
-
-  // Create a single cell spanning both columns
-  const totalCell = document.createElement('td');
-  totalCell.colSpan = 2;
-  totalCell.textContent = `Total Price: Rs ${total}`;
-
-  // Append the cell to the row, and row to the table
-  totalRow.appendChild(totalCell);
-  table.appendChild(totalRow);
+  const table = document.querySelector("table");
+  const row = document.createElement("tr");
+  const cell = document.createElement("td");
+  cell.id = "ans"; // Add id so Cypress can find it
+  cell.colSpan = 2;
+  cell.textContent = total;
+  row.appendChild(cell);
+  table.appendChild(row);
 };
-
-getSumBtn.addEventListener("click", getSum);
-  
-};
-
-getSumBtn.addEventListener("click", getSum);
-
